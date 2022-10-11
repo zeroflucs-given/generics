@@ -1,10 +1,10 @@
-# zeroflucs generics
+# generics
+_Generic code helpers for Go 1.18+ onwards_
 
 [![GoDoc](https://godoc.org/github.com/zeroflucs-given/generics?status.svg)](https://godoc.org/github.com/zeroflucs-given/generics)
-
 ![GitHub issues](https://img.shields.io/github/issues/zeroflucs-given/generics)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/zeroflucs-given/charybdis)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/zeroflucs-given/generics)
 
 ---
 
