@@ -148,6 +148,10 @@ Returns the last item of the slice that matches the filter.
 Runs the specified mapper over each element of the input slice, creating an output slice of
 a different type.
 
+### Mutate
+Allows mutation of the slice elements, but the output must be of the same type as the original 
+elements. 
+
 ### Reverse
 Creates a reverse-sorted version of the input slice.
 

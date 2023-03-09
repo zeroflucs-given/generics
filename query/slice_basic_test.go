@@ -53,11 +53,14 @@ func TestQueryableSlice(t *testing.T) {
 		Filter(func(index int, v int) bool {
 			return v%2 == 0 // Evens only
 		}).
+		Mutate(func(index int, v int) int {
+			return v + 2
+		}).
 		Take(3).
 		Reverse()
 
 	all := query.All(func(index int, v int) bool {
-		return v < 12
+		return v < 13
 	})
 	any := query.Any(func(index int, v int) bool {
 		return v%2 == 1
@@ -70,7 +73,7 @@ func TestQueryableSlice(t *testing.T) {
 	require.True(t, all, "All items should be < 12")
 	require.False(t, any, "Should have no odd values")
 	require.Equal(t, 3, count, "Should have 3 items")
-	require.Equal(t, 10, first, "First item should be 10")
-	require.Equal(t, 6, last, "Last item should be 6")
-	require.Equal(t, []int{10, 8, 6}, result, "Should have right items")
+	require.Equal(t, 12, first, "First item should be 10")
+	require.Equal(t, 8, last, "Last item should be 6")
+	require.Equal(t, []int{12, 10, 8}, result, "Should have right items")
 }
