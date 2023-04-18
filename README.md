@@ -141,6 +141,9 @@ the type default.
 ### Group / GroupWithContext
 Uses a mapper function to assign input values to buckets.
 
+### If
+If returns the equivilent value based on the predicate.
+
 ### Last / LastWithContext
 Returns the last item of the slice that matches the filter.
 
