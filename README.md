@@ -119,6 +119,13 @@ slice as no items fail the predicate.
 ### Any / AnyContext
 Returns true if any item in the slice passes.
 
+#### Combinations
+Returns all combinations (note: not permutations) of items of length N over the slice.
+
+### CombinationsFiltered 
+Returns all combinations of items of length N over the slice, where the members of the slice can be filtered.
+The return type contains references back to the original input list indicies. 
+
 ### Concatenate
 Joins N slices of items together in the given order. Allocates a new slice.
 
