@@ -32,6 +32,19 @@ func Contains[T comparable](items []T, value T) bool {
 	return false
 }
 
+// Cut removes the head of a list, returning it and the remainder of the list.
+// If the input list is empty, cut returns the type-default.
+func Cut[T any](items []T) (T, []T) {
+	var dflt T
+	if len(items) == 0 {
+		return dflt, nil
+	} else if len(items) == 1 {
+		return items[0], nil
+	}
+
+	return items[0], items[1:]
+}
+
 // DefaultIfEmpty checks to see if the specified slice is empty
 // and if so, creates a slice with a specified default value.
 func DefaultIfEmpty[T any](items []T, def T) []T {

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/zeroflucs-given/generics"
 )
@@ -46,6 +47,42 @@ func TestContainsFalse(t *testing.T) {
 
 	// Assert
 	require.False(t, result, "Should have the correct result")
+}
+
+func TestCut(t *testing.T) {
+	// Arrange
+	input := []int{9, 8, 7, 6}
+
+	// Act
+	head, rest := generics.Cut(input)
+
+	// Assert
+	assert.Equal(t, 9, head, "Should have the right head value")
+	assert.Equal(t, []int{8, 7, 6}, rest, "Should have correct list residual")
+}
+
+func TestCutLast(t *testing.T) {
+	// Arrange
+	input := []int{9}
+
+	// Act
+	head, rest := generics.Cut(input)
+
+	// Assert
+	assert.Equal(t, 9, head, "Should have the right head value")
+	assert.Nil(t, rest, "Should have no list residual")
+}
+
+func TestCutEmpty(t *testing.T) {
+	// Arrange
+	var input []int
+
+	// Act
+	head, rest := generics.Cut(input)
+
+	// Assert
+	assert.Equal(t, 0, head, "Should have correct head (type default)")
+	assert.Nil(t, rest, "Empty slice")
 }
 
 func TestDefaultIfEmpty(t *testing.T) {

@@ -1,6 +1,8 @@
 package generics_test
 
 import (
+	"context"
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -45,6 +47,64 @@ func TestKeys(t *testing.T) {
 	// Assert
 	require.NotNil(t, result, "Should have a result")
 	require.ElementsMatch(t, result, []string{"hello", "fizz"})
+}
+
+func TestMapValues(t *testing.T) {
+	// Arrange
+	input := map[int]string{
+		1: "one",
+		2: "two",
+	}
+
+	// Act
+	remapped := generics.MapValues(input, func(k int, v string) bool {
+		return v == "one"
+	})
+
+	// Assert
+	require.Equal(t, true, remapped[1])
+	require.Equal(t, false, remapped[2])
+}
+
+func TestMapValuesWithContext(t *testing.T) {
+	// Arrange
+	ctx := context.TODO()
+	input := map[int]string{
+		1: "one",
+		2: "two",
+	}
+
+	// Act
+	remapped, err := generics.MapValuesWithContext(ctx, input, func(ctx context.Context, k int, v string) (bool, error) {
+		return v == "one", nil
+	})
+
+	// Assert
+	require.NoError(t, err)
+	require.Equal(t, true, remapped[1])
+	require.Equal(t, false, remapped[2])
+}
+
+func TestMapValuesWithContextError(t *testing.T) {
+	// Arrange
+	ctx := context.TODO()
+	input := map[int]string{
+		1: "one",
+		2: "two",
+	}
+	fail := errors.New("fail")
+
+	// Act
+	remapped, err := generics.MapValuesWithContext(ctx, input, func(ctx context.Context, k int, v string) (bool, error) {
+		if v == "two" {
+			return false, fail
+		}
+		return v == "one", nil
+	})
+
+	// Assert
+	require.ErrorIs(t, err, fail)
+	require.Nil(t, remapped)
 }
 
 func TestValues(t *testing.T) {

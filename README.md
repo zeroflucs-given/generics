@@ -128,6 +128,10 @@ Returns true if the slice contains the specified value T, false otherwise. Uses 
 ### Count / CountContext
 Returns the count of items matching the input filters.
 
+### Cut
+Takes a slice and returns the head of the slice, plus a second value for the remainder
+of the slice.
+
 ### DefaultIfEmpty 
 Given a slice, if the slice is empty or nil will create a slice of a single default item.
 
@@ -142,7 +146,8 @@ the type default.
 Uses a mapper function to assign input values to buckets.
 
 ### If
-If returns the equivilent value based on the predicate.
+If returns the equivilent value based on the predicate. This is an eager evaluation of both sides
+and not a true ternary operator.
 
 ### Last / LastWithContext
 Returns the last item of the slice that matches the filter.
@@ -154,6 +159,13 @@ a different type.
 ### Mutate
 Allows mutation of the slice elements, but the output must be of the same type as the original 
 elements. 
+
+### PointerTo
+Returns a pointer reference to the input. Useful for lots of API's that use string, integer pointers to differentiate between empty and absent.
+
+## PointerOrNil 
+Returns a pointer to the input, unless the input its the default value for its type (i.e. 0, empty string etc). In that scenario will
+return nil.
 
 ### Reverse
 Creates a reverse-sorted version of the input slice.
@@ -179,6 +191,8 @@ Take items from the slice until the filter function returns false.
 ### ToMap / ToMapWithContext
 Converts a slice of values to Go map, using mappers for the key and values respectively.
 
+### ValueOrDefault
+If a pointer is set, will return the dereferenced value. Otherwise returns the default value of the target type.
 
 ## Slice Aggregations
 ---------------
@@ -199,6 +213,9 @@ Assembles a map from a slice of key-value pairs.
 
 ## Keys
 Returns a slice of the key members of the map.
+
+## MapValues / MapValuesWithContext
+Allows translation of a maps items to other values.
 
 ## ToKeyValues
 Converts a map into a slice of key-value pairs. As per Go handling of maps, the order of
