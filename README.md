@@ -142,6 +142,9 @@ Creates a filtered set of the values in the slice, using a filter function.
 Returns the first item of the slice that matches the filters. If no value matches, returns
 the type default.
 
+### FirstIndexOf
+Returns the first index of a value in a typed slice, or -1 if not present.
+
 ### Group / GroupWithContext
 Uses a mapper function to assign input values to buckets.
 
@@ -151,6 +154,9 @@ and not a true ternary operator.
 
 ### Last / LastWithContext
 Returns the last item of the slice that matches the filter.
+
+### LastIndexOf
+Returns the index of the last occurence of a value in the slice, or -1 if not present.
 
 ### Map / MapWithContext
 Runs the specified mapper over each element of the input slice, creating an output slice of

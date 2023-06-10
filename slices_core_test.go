@@ -123,6 +123,46 @@ func TestReverse(t *testing.T) {
 	require.Equal(t, []int{3, 4, 5}, result, "Should have right result")
 }
 
+func TestFirstIndexOf(t *testing.T) {
+	// Arrange
+	input := []int{9, 8, 7, 6, 7, 8}
+
+	// Act
+	index := generics.FirstIndexOf(8, input)
+
+	require.Equal(t, 1, index, "Should have correct index")
+}
+
+func TestFirstIndexOfMissing(t *testing.T) {
+	// Arrange
+	input := []int{9, 8, 7, 6, 7, 8}
+
+	// Act
+	index := generics.FirstIndexOf(4, input)
+
+	require.Equal(t, -1, index, "Should have correct index")
+}
+
+func TestLastIndexOf(t *testing.T) {
+	// Arrange
+	input := []int{9, 8, 7, 6, 7, 8}
+
+	// Act
+	index := generics.LastIndexOf(7, input)
+
+	require.Equal(t, 4, index, "Should have correct index")
+}
+
+func TestLastIndexOfMissing(t *testing.T) {
+	// Arrange
+	input := []int{9, 8, 7, 6, 7, 8}
+
+	// Act
+	index := generics.LastIndexOf(4, input)
+
+	require.Equal(t, -1, index, "Should have correct index")
+}
+
 func TestReverseEmpty(t *testing.T) {
 	// Arrange
 	input := []int{}

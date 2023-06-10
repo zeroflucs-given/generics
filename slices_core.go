@@ -57,6 +57,28 @@ func DefaultIfEmpty[T any](items []T, def T) []T {
 	return items
 }
 
+// FirstIndexOf returns the first index of an item in the slice
+func FirstIndexOf[T comparable](v T, items []T) int {
+	for i := 0; i < len(items); i++ {
+		if items[i] == v {
+			return i
+		}
+	}
+
+	return -1
+}
+
+// LastIndexOf returns the last index of an item in the slice
+func LastIndexOf[T comparable](v T, items []T) int {
+	for i := len(items) - 1; i >= 0; i-- {
+		if items[i] == v {
+			return i
+		}
+	}
+
+	return -1
+}
+
 // Reverse creates a reversed copy of the slice
 func Reverse[T any](items []T) []T {
 	output := make([]T, len(items))
