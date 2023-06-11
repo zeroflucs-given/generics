@@ -34,22 +34,15 @@ func Combinations[T any](items []T, size int) [][]T {
 // CombinationsFiltered returns the combinations of items, but applys a filter to the items. The returned indexed
 // items represent the original positions in the raw list.
 func CombinationsFiltered[T any](items []T, size int, filter filtering.Expression[T]) [][]IndexedItem[T] {
-	filteredItems := make([]T, 0, len(items))
-	filteredIndexes := make(map[int]int, len(items))
+	filteredItems := make([]IndexedItem[T], 0, len(items))
 	for i, v := range items {
 		if filter == nil || filter(i, v) {
-			filteredIndexes[len(filteredItems)] = i
-			filteredItems = append(filteredItems, v)
+			filteredItems = append(filteredItems, IndexedItem[T]{
+				Index: i,
+				Item:  v,
+			})
 		}
 	}
 
-	combos := Combinations(filteredItems, size)
-	return Map(combos, func(comboIndex int, items []T) []IndexedItem[T] {
-		return Map(filteredItems, func(filteredIndex int, item T) IndexedItem[T] {
-			return IndexedItem[T]{
-				Index: filteredIndexes[filteredIndex],
-				Item:  item,
-			}
-		})
-	})
+	return Combinations(filteredItems, size)
 }
