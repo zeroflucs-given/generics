@@ -45,7 +45,7 @@ func CombinationsFiltered[T any](items []T, size int, filter filtering.Expressio
 
 	combos := Combinations(filteredItems, size)
 	return Map(combos, func(comboIndex int, items []T) []IndexedItem[T] {
-		return Map(items, func(filteredIndex int, item T) IndexedItem[T] {
+		return Map(filteredItems, func(filteredIndex int, item T) IndexedItem[T] {
 			return IndexedItem[T]{
 				Index: filteredIndexes[filteredIndex],
 				Item:  item,
