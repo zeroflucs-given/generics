@@ -1,6 +1,6 @@
 package stack
 
-import collections "github.com/zeroflucs-given/generics/collections"
+import "github.com/zeroflucs-given/generics/collections"
 
 // Ensure we meet the Queue[T] interface at compile time
 var _ collections.Queue[int] = (*Stack[int])(nil)

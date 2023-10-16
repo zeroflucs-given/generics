@@ -1,6 +1,6 @@
 package bplustree
 
-import collections "github.com/zeroflucs-given/generics/collections"
+import "github.com/zeroflucs-given/generics/collections"
 
 // Insert a value into the tree
 func (t *tree[K, V]) Insert(key K, value V) collections.RecordID {

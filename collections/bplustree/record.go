@@ -1,6 +1,6 @@
 package bplustree
 
-import collections "github.com/zeroflucs-given/generics/collections"
+import "github.com/zeroflucs-given/generics/collections"
 
 type record[V any] struct {
 	RecordID collections.RecordID `json:"rid"`   // Record ID

@@ -7,7 +7,7 @@ import (
 	"github.com/zeroflucs-given/generics/filtering"
 )
 
-// Slice creates an instance of a slice-query over a a slice
+// Slice creates an instance of a slice-query over a slice
 func Slice[T any](input []T) SliceQuery[T] {
 	return sliceQueryInternal[T]{
 		input: input,
@@ -110,7 +110,7 @@ func (s sliceQueryInternal[T]) Last(filters ...filtering.Expression[T]) T {
 	return generics.Last(s.input, filters...)
 }
 
-// Map allows mutating of a slice elements
+// Mutate allows mutating of a slice elements
 func (s sliceQueryInternal[T]) Mutate(mapper func(index int, input T) T) SliceQuery[T] {
 	return sliceQueryInternal[T]{
 		input: generics.Map(s.input, mapper),

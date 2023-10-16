@@ -24,7 +24,7 @@ type List[T comparable] interface {
 	// Remove removes all instances of the specified item from the list.
 	Remove(v T)
 
-	// RemoveAt removes the item at the specified inde from the list. If the index
+	// RemoveAt removes the item at the specified index from the list. If the index
 	// is beyond the bounds of the list, the operation will panic.
 	RemoveAt(index int)
 

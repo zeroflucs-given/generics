@@ -9,7 +9,7 @@ import (
 // SliceMapperExpression is a type that represents a generic mapper
 type SliceMapperExpression[T any, V any] func(index int, input T) V
 
-// MapperContextExp is a type used to represent a context aware generic mapper
+// SliceMapperExpressionWithContext is a type used to represent a context aware generic mapper
 type SliceMapperExpressionWithContext[T any, V any] func(ctx context.Context, index int, v T) (V, error)
 
 // Group rolls up items into groups based on a mapper function that provides a key per item
@@ -27,13 +27,12 @@ type compactionSurvivor[T any] struct {
 	value        T
 }
 
-// Compact takes a slice and compacts it, by reducing to only the last occurence of a given key. This
+// Compact takes a slice and compacts it, by reducing to only the last occurrence of a given key. This
 // is akin to Kafka topic compaction, and used for scenarios where you have a slice of mixed updates
 // but want to take only the final update for a given predicate. The result order is determined by the
 // final position(s) of the surviving elements relative to each other.
 func Compact[T any, K comparable](input []T, keyMapper SliceMapperExpression[T, K]) []T {
-	// Create a the set of last updates per item, tracking their
-	// index
+	// Create a set of last updates per item, tracking their index
 	survivors := make(map[K]compactionSurvivor[T])
 	for i, v := range input {
 		key := keyMapper(i, v)
@@ -80,7 +79,7 @@ func Map[T any, V any](items []T, mapper SliceMapperExpression[T, V]) []V {
 	return output
 }
 
-// MapWithContext executes a mappper over the members of a slice using the specified context
+// MapWithContext executes a mapper over the members of a slice using the specified context
 func MapWithContext[T any, V any](ctx context.Context, items []T, mapper SliceMapperExpressionWithContext[T, V]) ([]V, error) {
 	output := make([]V, len(items))
 	for i, value := range items {

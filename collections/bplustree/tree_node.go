@@ -16,7 +16,7 @@ type treeNode[K generics.Comparable, V any] struct {
 	Count      int    `json:"count"`      // Number of children/data records
 	Annotation string `json:"annotation"` // Annotation/Informational tag
 
-	// Geneology
+	// Genealogy
 	Parent          *treeNode[K, V] `json:"-"` // Parent
 	PreviousSibling *treeNode[K, V] `json:"-"` // Previous sibling
 	NextSibling     *treeNode[K, V] `json:"-"` // Next sibling

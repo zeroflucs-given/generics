@@ -9,7 +9,7 @@ func combinations(objects []interface{}, n int) [][]interface{} {
 		return [][]interface{}{}
 	}
 
-	combs := [][]interface{}{}
+	var combs [][]interface{}
 	for i, obj := range objects {
 		if n == 1 {
 			combs = append(combs, []interface{}{obj})

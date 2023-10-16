@@ -13,5 +13,5 @@ package bplustree
 
 		BenchmarkInsertsSequentialFixedLarge-12     38         305604530 ns/op        173427506 B/op    212506 allocs/op
 
-	This means that the tree can accomodate approximately ~10 million inserts/second.
+	This means that the tree can accommodate approximately ~10 million inserts/second.
  **/

@@ -27,7 +27,7 @@ func (s *Stack[T]) Count() int {
 }
 
 // Capacity is the capacity of this stack. Stacks can grow until memory
-// is depeleted today.
+// is depleted today.
 func (s *Stack[T]) Capacity() int {
 	return len(s.data)
 }

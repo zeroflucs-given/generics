@@ -3,7 +3,7 @@ package linkedlist
 import (
 	"sync"
 
-	collections "github.com/zeroflucs-given/generics/collections"
+	"github.com/zeroflucs-given/generics/collections"
 )
 
 // New creates a new linked list.

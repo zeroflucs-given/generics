@@ -8,7 +8,7 @@ import (
 )
 
 // SliceQueryContext is context-aware operations. Any operation that materializes back to a slice
-// or scalar will trigger any failures accumulated to be propegated to the caller. You can use
+// or scalar will trigger any failures accumulated to be propagated to the caller. You can use
 // filtering.Wrap to convert any filters to be context aware.
 type SliceQueryContext[T any] interface {
 	// All returns true if all items in the slice meet our filters

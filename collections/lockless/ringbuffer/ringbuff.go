@@ -3,7 +3,7 @@ package ringbuffer
 import (
 	"fmt"
 
-	collections "github.com/zeroflucs-given/generics/collections"
+	"github.com/zeroflucs-given/generics/collections"
 )
 
 // New is a fixed-size ring/circle buffer of values.

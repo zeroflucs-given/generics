@@ -3,7 +3,7 @@ package ringbuffer
 import (
 	"fmt"
 
-	collections "github.com/zeroflucs-given/generics/collections"
+	"github.com/zeroflucs-given/generics/collections"
 )
 
 // Ensure we meet the Queue[T] interface at compile time

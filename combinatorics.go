@@ -31,7 +31,7 @@ func Combinations[T any](items []T, size int) [][]T {
 	return result
 }
 
-// CombinationsFiltered returns the combinations of items, but applys a filter to the items. The returned indexed
+// CombinationsFiltered returns the combinations of items, but applies a filter to the items. The returned indexed
 // items represent the original positions in the raw list.
 func CombinationsFiltered[T any](items []T, size int, filter filtering.Expression[T]) [][]IndexedItem[T] {
 	filteredItems := make([]IndexedItem[T], 0, len(items))
