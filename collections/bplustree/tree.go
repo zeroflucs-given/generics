@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/zeroflucs-given/generics"
-	collections "github.com/zeroflucs-given/generics/collections"
+	"github.com/zeroflucs-given/generics/collections"
 	"github.com/zeroflucs-given/generics/collections/ringbuffer"
 )
 
@@ -47,7 +47,7 @@ type tree[K generics.Comparable, V any] struct {
 
 // Dump writes the tree out for diagnostic purposes to a file
 func (t *tree[K, V]) Dump(f io.Writer) {
-	fmt.Fprintf(f, "========== TREE DUMP (Order: %v, NodesTotal: %v, Records: %v) ===========\n", t.Order, t.NodeCount, t.RecordCount)
+	_, _ = fmt.Fprintf(f, "========== TREE DUMP (Order: %v, NodesTotal: %v, Records: %v) ===========\n", t.Order, t.NodeCount, t.RecordCount)
 	t.Root.Dump(f, 1)
 }
 
@@ -150,7 +150,7 @@ func (t *tree[K, V]) allocChildSet() []*treeNode[K, V] {
 func (t *tree[K, V]) findLeaf(k K) *treeNode[K, V] {
 	current := t.Root
 	// NB: We're using a linear scan here, same reason as treenode::getInsertIndex
-	// Even when nodes have unreasonable sizes, the pay-off was non-existant versus
+	// Even when nodes have unreasonable sizes, the pay-off was non-existent versus
 	// a linear scan (calculating pivots and branching costs more than iteration)
 	// Whilst there is theoretically an inflection point, its just not worth it for
 	// real-world use.

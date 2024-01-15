@@ -1,6 +1,6 @@
 package generics
 
-// PointerTo simply creates a pointer to a value, useful
+// PointerTo returns the pointer to a value
 func PointerTo[T any](v T) *T {
 	return &v
 }
