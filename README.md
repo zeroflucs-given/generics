@@ -142,6 +142,10 @@ of the slice.
 ### DefaultIfEmpty 
 Given a slice, if the slice is empty or nil will create a slice of a single default item.
 
+### ExecuteOnce
+Takes a function to be run at a later time and caches its result for retrieval many times.
+Subsequent retrievals will block until either their context is cancelled, or the task completes.
+
 ### Filter / FilterContext
 Creates a filtered set of the values in the slice, using a filter function.
 
