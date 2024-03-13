@@ -160,14 +160,14 @@ Returns the first index of a value in a typed slice, or -1 if not present.
 Uses a mapper function to assign input values to buckets.
 
 ### If
-If returns the equivilent value based on the predicate. This is an eager evaluation of both sides
+If returns the equivalent value based on the predicate. This is an eager evaluation of both sides
 and not a true ternary operator.
 
 ### Last / LastWithContext
 Returns the last item of the slice that matches the filter.
 
 ### LastIndexOf
-Returns the index of the last occurence of a value in the slice, or -1 if not present.
+Returns the index of the last occurrence of a value in the slice, or -1 if not present.
 
 ### Map / MapWithContext
 Runs the specified mapper over each element of the input slice, creating an output slice of
@@ -178,10 +178,10 @@ Allows mutation of the slice elements, but the output must be of the same type a
 elements. 
 
 ### PointerTo
-Returns a pointer reference to the input. Useful for lots of API's that use string, integer pointers to differentiate between empty and absent.
+Returns a pointer reference to the input. Useful for lots of APIs that use string, integer pointers to differentiate between empty and absent.
 
 ## PointerOrNil 
-Returns a pointer to the input, unless the input its the default value for its type (i.e. 0, empty string etc). In that scenario will
+Returns a pointer to the input, unless the input is the default value for its type (i.e. 0, empty string etc). In that scenario will
 return nil.
 
 ### Reverse
