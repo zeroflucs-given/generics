@@ -1,6 +1,6 @@
 module github.com/zeroflucs-given/generics
 
-go 1.18
+go 1.24.4
 
 require github.com/stretchr/testify v1.7.0
 
