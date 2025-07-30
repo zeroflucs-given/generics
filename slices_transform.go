@@ -12,14 +12,16 @@ type SliceMapperExpression[T any, V any] func(index int, input T) V
 // SliceMapperExpressionWithContext is a type used to represent a context aware generic mapper
 type SliceMapperExpressionWithContext[T any, V any] func(ctx context.Context, index int, v T) (V, error)
 
+// WrapSliceMapperWithContext adapts a non-context-aware slice mapper for use with a context-aware filtering path.
+func WrapSliceMapperWithContext[T any, V any](mapper SliceMapperExpression[T, V]) SliceMapperExpressionWithContext[T, V] {
+	return func(_ context.Context, index int, v T) (V, error) {
+		return mapper(index, v), nil
+	}
+}
+
 // Group rolls up items into groups based on a mapper function that provides a key per item
 func Group[T any, K comparable](items []T, keyMapper SliceMapperExpression[T, K]) map[K][]T {
-	output := make(map[K][]T)
-	for i, value := range items {
-		key := keyMapper(i, value)
-		output[key] = append(output[key], value)
-	}
-	return output
+	return Must(GroupWithContext(context.Background(), items, WrapSliceMapperWithContext(keyMapper)))
 }
 
 type compactionSurvivor[T any] struct {
@@ -72,11 +74,7 @@ func GroupWithContext[T any, K comparable](ctx context.Context, items []T, keyMa
 
 // Map converts values in a slice from one type to another
 func Map[T any, V any](items []T, mapper SliceMapperExpression[T, V]) []V {
-	output := make([]V, len(items))
-	for i, value := range items {
-		output[i] = mapper(i, value)
-	}
-	return output
+	return Must(MapWithContext(context.Background(), items, WrapSliceMapperWithContext(mapper)))
 }
 
 // MapWithContext executes a mapper over the members of a slice using the specified context
@@ -96,14 +94,7 @@ func MapWithContext[T any, V any](ctx context.Context, items []T, mapper SliceMa
 // ToMap converts a slice of items into a dictionary using mappers for the key and value pairs. If
 // multiple items yield the same key, the last key in the set will be the one kept.
 func ToMap[T any, K comparable, V any](items []T, keyMapper SliceMapperExpression[T, K], valueMapper SliceMapperExpression[T, V]) map[K]V {
-	output := make(map[K]V, len(items))
-	for i, item := range items {
-		key := keyMapper(i, item)
-		value := valueMapper(i, item)
-		output[key] = value
-	}
-
-	return output
+	return Must(ToMapWithContext(context.Background(), items, WrapSliceMapperWithContext(keyMapper), WrapSliceMapperWithContext(valueMapper)))
 }
 
 // ToMapWithContext converts a slice of items into a dictionary using mappers for the key and value pairs. If

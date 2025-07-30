@@ -37,6 +37,18 @@ func AndWithContext[T any](filters ...ExpressionWithContext[T]) func(ctx context
 	}
 }
 
+func AndWrapWithContext[T any](filters ...Expression[T]) ExpressionWithContext[T] {
+	return func(_ context.Context, index int, v T) (bool, error) {
+		for _, filter := range filters {
+			if !filter(index, v) {
+				return false, nil
+			}
+		}
+
+		return true, nil
+	}
+}
+
 // Or creates a composite filter that passes an item if any filter meets it. If there
 // are no matching filters, the item fails the filter.
 func Or[T any](filters ...Expression[T]) func(index int, v T) bool {

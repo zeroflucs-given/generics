@@ -110,18 +110,7 @@ func Take[T any](items []T, n int) []T {
 
 // TakeUntil takes items from the slice until the first item that passes the predicate.
 func TakeUntil[T any](items []T, filters ...filtering.Expression[T]) []T {
-	filter := filtering.Not(filtering.And(filters...))
-	var result []T
-
-	for i, v := range items {
-		if !filter(i, v) {
-			break
-		}
-
-		result = append(result, v)
-	}
-
-	return result
+	return Must(TakeUntilWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // TakeUntilWithContext takes items from the slice until the first item that passes the predicate.
@@ -146,18 +135,7 @@ func TakeUntilWithContext[T any](ctx context.Context, items []T, filters ...filt
 
 // TakeWhile takes items from the slice until the first item that fails the predicate.
 func TakeWhile[T any](items []T, filters ...filtering.Expression[T]) []T {
-	filter := filtering.And(filters...)
-	var result []T
-
-	for i, v := range items {
-		if !filter(i, v) {
-			break
-		}
-
-		result = append(result, v)
-	}
-
-	return result
+	return Must(TakeWhileWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // TakeWhileWithContext takes items from the slice until the first item that fails the predicate.

@@ -32,11 +32,7 @@ func Keys[K comparable, V any](input map[K]V) []K {
 
 // MapValues translates all values in a map to new values
 func MapValues[K comparable, V any, NV any](input map[K]V, mapper func(k K, v V) NV) map[K]NV {
-	result := make(map[K]NV, len(input))
-	for k, v := range input {
-		result[k] = mapper(k, v)
-	}
-	return result
+	return Must(MapValuesWithContext(context.Background(), input, func(_ context.Context, k K, v V) (NV, error) { return mapper(k, v), nil }))
 }
 
 // MapValuesWithContext translates all values in a map to new values

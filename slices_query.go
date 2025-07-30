@@ -11,16 +11,7 @@ import (
 // as a logical AND. If no filters are set, will return the first item in the slice. If no items
 // match, the type default is returned.
 func First[T any](items []T, filters ...filtering.Expression[T]) T {
-	filter := filtering.And(filters...)
-
-	var def T
-	for i, v := range items {
-		if filter(i, v) {
-			return v
-		}
-	}
-
-	return def
+	return Must(FirstWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // FirstWithContext gets the first item in a slice that passes the filters. If multiple filters are set, they are treated
@@ -72,15 +63,7 @@ func Intersect[T comparable](items []T, others ...T) []T {
 
 // Filter filters item in a list
 func Filter[T any](items []T, filters ...filtering.Expression[T]) []T {
-	filter := filtering.And(filters...)
-
-	output := make([]T, 0, len(items))
-	for i, v := range items {
-		if filter(i, v) {
-			output = append(output, v)
-		}
-	}
-	return output
+	return Must(FilterWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // FilterWithContext filters item in a list
@@ -104,17 +87,7 @@ func FilterWithContext[T any](ctx context.Context, items []T, filters ...filteri
 // Last item in a slice that matches the specified filters. Returns the type
 // default if none found.
 func Last[T any](items []T, filters ...filtering.Expression[T]) T {
-	filter := filtering.And(filters...)
-
-	var def T
-	for reverseIndex := len(items) - 1; reverseIndex >= 0; reverseIndex-- {
-		match := filter(reverseIndex, items[reverseIndex])
-		if match {
-			return items[reverseIndex]
-		}
-	}
-
-	return def
+	return Must(LastWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // LastWithContext item in a slice that matches the specified filters. Returns the type

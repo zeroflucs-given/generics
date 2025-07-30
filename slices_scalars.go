@@ -10,15 +10,7 @@ import (
 // All returns true if no item in the list fails to meet the predicates. If multiple
 // predicates are passed, they are treated as logical AND operations.
 func All[T any](items []T, filters ...filtering.Expression[T]) bool {
-	filter := filtering.And(filters...)
-
-	for i, v := range items {
-		if !filter(i, v) {
-			return false
-		}
-	}
-
-	return true
+	return Must(AllWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // AllWithContext is a context aware function that returns true if no item in the list fails to meet the predicate.
@@ -43,15 +35,7 @@ func AllWithContext[T any](ctx context.Context, items []T, filters ...filtering.
 // Any returns true if any item in the slice matches the filter. If multiple predicates are passed,
 // they are treated as logical AND operations.
 func Any[T any](items []T, filters ...filtering.Expression[T]) bool {
-	filter := filtering.And(filters...)
-
-	for i, v := range items {
-		if filter(i, v) {
-			return true
-		}
-	}
-
-	return false
+	return Must(AnyWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // AnyWithContext is a context aware function that returns true if any item in the slice matches the filter.
@@ -72,19 +56,7 @@ func AnyWithContext[T any](ctx context.Context, items []T, filters ...filtering.
 
 // Count returns how many items pass the filters
 func Count[T any](items []T, filters ...filtering.Expression[T]) int {
-	if len(filters) == 0 {
-		return len(items)
-	}
-	filter := filtering.And(filters...)
-
-	count := 0
-	for i, v := range items {
-		if filter(i, v) {
-			count++
-		}
-	}
-
-	return count
+	return Must(CountWithContext(context.Background(), items, filtering.AndWrapWithContext(filters...)))
 }
 
 // CountWithContext counts how many items pass the filter
