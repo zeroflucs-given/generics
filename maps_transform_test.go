@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	"github.com/zeroflucs-given/generics"
 )
 
@@ -62,8 +63,8 @@ func TestMapValues(t *testing.T) {
 	})
 
 	// Assert
-	require.Equal(t, true, remapped[1])
-	require.Equal(t, false, remapped[2])
+	require.True(t, remapped[1])
+	require.False(t, remapped[2])
 }
 
 func TestMapValuesWithContext(t *testing.T) {
@@ -81,8 +82,8 @@ func TestMapValuesWithContext(t *testing.T) {
 
 	// Assert
 	require.NoError(t, err)
-	require.Equal(t, true, remapped[1])
-	require.Equal(t, false, remapped[2])
+	require.True(t, remapped[1])
+	require.False(t, remapped[2])
 }
 
 func TestMapValuesWithContextError(t *testing.T) {

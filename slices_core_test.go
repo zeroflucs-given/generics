@@ -7,6 +7,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
 	"github.com/zeroflucs-given/generics"
 )
 
@@ -87,7 +88,7 @@ func TestCutEmpty(t *testing.T) {
 
 func TestDefaultIfEmpty(t *testing.T) {
 	// Arrange
-	input := []int{}
+	var input []int
 	def := 42
 
 	// Act
@@ -165,14 +166,14 @@ func TestLastIndexOfMissing(t *testing.T) {
 
 func TestReverseEmpty(t *testing.T) {
 	// Arrange
-	input := []int{}
+	var input []int
 
 	// Act
 	result := generics.Reverse(input)
 
 	// Assert
 	require.NotNil(t, result, "Should have a result")
-	require.Len(t, result, 0, "Should have the right result")
+	require.Empty(t, result, "Should have the right result")
 }
 
 func TestSkip(t *testing.T) {
@@ -212,7 +213,7 @@ func TestTake(t *testing.T) {
 
 func TestTakeEmpty(t *testing.T) {
 	// Arrange
-	input := []int{}
+	var input []int
 
 	// Act
 	result := generics.Take(input, 99)

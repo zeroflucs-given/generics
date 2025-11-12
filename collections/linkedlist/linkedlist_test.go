@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	"github.com/zeroflucs-given/generics/collections"
 )
 
@@ -19,8 +20,8 @@ func TestLinkedListPeek(t *testing.T) {
 
 	valueRequired, value := buff.Peek()
 	require.True(t, valueRequired, "Should have a value to peek")
-	require.Equal(t, value, 4, "Both values should be same")
-	require.Equal(t, buff.Count(), 1, "Should have a count of one")
+	require.Equal(t, 4, value, "Both values should be same")
+	require.Equal(t, 1, buff.Count(), "Should have a count of one")
 
 }
 
@@ -68,7 +69,7 @@ func TestLinkedListRemoveFirst(t *testing.T) {
 
 	buff.Remove(0)
 	require.False(t, buff.Contains(0), "Should not have 0 in the list")
-	require.Equal(t, buff.Count(), 4, "Should have 4 items in the list")
+	require.Equal(t, 4, buff.Count(), "Should have 4 items in the list")
 }
 
 func TestLinkedListRemoveLast(t *testing.T) {
@@ -82,7 +83,7 @@ func TestLinkedListRemoveLast(t *testing.T) {
 
 	buff.Remove(1)
 	require.False(t, buff.Contains(1), "Should not have 4 in the list")
-	require.Equal(t, buff.Count(), 4, "Should have 4 items in the list")
+	require.Equal(t, 4, buff.Count(), "Should have 4 items in the list")
 }
 
 func TestLinkedListRemoveFirstIndex(t *testing.T) {

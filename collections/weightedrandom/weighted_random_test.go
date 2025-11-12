@@ -79,7 +79,7 @@ func BenchmarkWeightedRandomPick(b *testing.B) {
 
 			b.StartTimer()
 
-			for i := 0; i < b.N; i++ {
+			for b.Loop() {
 				wr.Pick(rng)
 			}
 		})

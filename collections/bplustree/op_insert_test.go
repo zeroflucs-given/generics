@@ -9,7 +9,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	collections "github.com/zeroflucs-given/generics/collections"
+
+	"github.com/zeroflucs-given/generics/collections"
 )
 
 const (
@@ -38,7 +39,7 @@ func TestInsertsBasic(t *testing.T) {
 		{11, "sense"},
 		{21, "immediately"},
 		{43, "."},
-		{44, "Somtimes"},
+		{44, "Sometimes"},
 		{45, "keys"},
 		{46, "come"},
 		{47, "in"},
@@ -59,9 +60,9 @@ func TestInsertsBasic(t *testing.T) {
 				for kvp := range tree.Scan() {
 					require.LessOrEqual(t, prev, kvp.Key, "Keys should be ascending")
 					prev = kvp.Key
-					//t.Logf("  K=%v, V=%v", kvp.Key, kvp.Value)
+					// t.Logf("  K=%v, V=%v", kvp.Key, kvp.Value)
 					count++
-					require.LessOrEqual(t, count-1, i, "Count shouldnt overrun during scan")
+					require.LessOrEqual(t, count-1, i, "Count shouldn't overrun during scan")
 				}
 				require.Equal(t, i+1, count, "Should have right number of values in tree")
 
@@ -81,7 +82,7 @@ func TestBulkInsertWithVerify(t *testing.T) {
 	rnd := rand.New(rs)
 
 	tree, err := New[int, int](order, DefaultTestPreAlloc)
-	require.NoError(t, err, "Shpud not error starting")
+	require.NoError(t, err, "Should not error while starting")
 	require.NotNil(t, tree, "Should have a tree")
 
 	for i := 0; i < dataSize; i++ {

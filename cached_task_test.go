@@ -2,13 +2,15 @@ package generics_test
 
 import (
 	"context"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-	"github.com/zeroflucs-given/generics"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
+	"github.com/zeroflucs-given/generics"
 )
 
 func TestExecuteOnce(t *testing.T) {
@@ -21,7 +23,7 @@ func TestExecuteOnce(t *testing.T) {
 
 		counter := atomic.Int32{}
 		var task = generics.ExecuteOnce[XX](func(ctx context.Context) (*XX, error) {
-			//_ = <-time.After(5 * time.Second)
+			// _ = <-time.After(5 * time.Second)
 			counter.Add(1)
 			return &XX{X: 42}, nil
 		})
@@ -33,8 +35,8 @@ func TestExecuteOnce(t *testing.T) {
 		ch := make(chan struct{})
 		go func() {
 			x1, err := task.Get(ctx)
-			require.NoError(t, err)
-			require.Equal(t, expected, x1)
+			assert.NoError(t, err)
+			assert.Equal(t, expected, x1)
 			ch <- struct{}{}
 		}()
 

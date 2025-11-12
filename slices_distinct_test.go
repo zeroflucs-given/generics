@@ -1,11 +1,12 @@
 package generics
 
 import (
-	"github.com/stretchr/testify/assert"
 	"hash/fnv"
 	"slices"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSliceDistinct(t *testing.T) {

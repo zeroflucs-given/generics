@@ -31,7 +31,7 @@ func benchmarkTreeNodeGetInsertIndexInternal(b *testing.B, order int) {
 	}
 	b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		valueToInsert := rnd.Int31()
 		node.getInsertIndex(valueToInsert)
 	}

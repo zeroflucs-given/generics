@@ -1,5 +1,4 @@
 //go:build perfanalysis
-// +build perfanalysis
 
 package bplustree
 
@@ -60,7 +59,7 @@ func BenchmarkInsertsSequentialFixedLarge(b *testing.B) {
 }
 
 func benchmarkInsertsRandomInternal(b *testing.B, order int, dataSize int) {
-	for iter := 0; iter < b.N; iter++ {
+	for b.Loop() {
 		tree, err := New[int, int](order, DefaultTestPreAlloc)
 		if err != nil {
 			b.Logf("Error: %v", err)
@@ -80,7 +79,7 @@ func benchmarkInsertsRandomInternal(b *testing.B, order int, dataSize int) {
 }
 
 func benchmarkInsertsSequentialInternal(b *testing.B, order int, dataSize int) {
-	for iter := 0; iter < b.N; iter++ {
+	for b.Loop() {
 		tree, err := New[int, int](order, DefaultTestPreAlloc)
 		if err != nil {
 			b.Logf("Error: %v", err)

@@ -29,18 +29,18 @@ type treeNode[K generics.Comparable, V any] struct {
 func (tn *treeNode[K, V]) Dump(f io.Writer, depth int) {
 	prefix := strings.Repeat("\t|", depth) + "-"
 	if tn == nil {
-		fmt.Fprintf(f, "%v(Empty)\n", prefix)
+		_, _ = fmt.Fprintf(f, "%v(Empty)\n", prefix)
 		return
 	}
 
-	fmt.Fprintf(f, "%vNODE(%v) [Leaf=%v, Count=%v] %q\n", prefix, tn.ID, tn.Leaf, tn.Count, tn.Annotation)
-	fmt.Fprintf(f, "%v  Prev: %v | Parent: %v | Next: %v\n", prefix, tn.PreviousSibling.NodeID(), tn.Parent.NodeID(), tn.NextSibling.NodeID())
+	_, _ = fmt.Fprintf(f, "%vNODE(%v) [Leaf=%v, Count=%v] %q\n", prefix, tn.ID, tn.Leaf, tn.Count, tn.Annotation)
+	_, _ = fmt.Fprintf(f, "%v  Prev: %v | Parent: %v | Next: %v\n", prefix, tn.PreviousSibling.NodeID(), tn.Parent.NodeID(), tn.NextSibling.NodeID())
 
 	for i := 0; i < tn.Count; i++ {
 		if tn.Leaf {
-			fmt.Fprintf(f, "%v- RECORD %d [Key: %v, Record #: %d]\n", prefix, i, tn.Keys[i], tn.Records[i].RecordID)
+			_, _ = fmt.Fprintf(f, "%v- RECORD %d [Key: %v, Record #: %d]\n", prefix, i, tn.Keys[i], tn.Records[i].RecordID)
 		} else {
-			fmt.Fprintf(f, "%v- CHILD #%d [Key: %v] NODE(%v)\n", prefix, i, tn.Keys[i], tn.Children[i].ID)
+			_, _ = fmt.Fprintf(f, "%v- CHILD #%d [Key: %v] NODE(%v)\n", prefix, i, tn.Keys[i], tn.Children[i].ID)
 			tn.Children[i].Dump(f, depth+1)
 		}
 	}

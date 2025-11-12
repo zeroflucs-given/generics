@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	collections "github.com/zeroflucs-given/generics/collections"
 )
 
@@ -44,8 +45,8 @@ func TestStackPeek(t *testing.T) {
 
 	valueRequired, value := buff.Peek()
 	require.True(t, valueRequired, "Should have a value to peek")
-	require.Equal(t, value, 4, "Both values should be same")
-	require.Equal(t, buff.Count(), 1, "Should have a count of one")
+	require.Equal(t, 4, value, "Both values should be same")
+	require.Equal(t, 1, buff.Count(), "Should have a count of one")
 
 }
 

@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	collections "github.com/zeroflucs-given/generics/collections"
 )
 
@@ -12,7 +13,7 @@ import (
 // error
 func TestRingBufferInserts(t *testing.T) {
 	src := rand.NewSource(133713371337)
-	rng := rand.New(src) //random number generator
+	rng := rand.New(src) // random number generator
 	testSize := 13
 
 	buff := New[int](testSize)
@@ -87,8 +88,8 @@ func TestRingBufferPeek(t *testing.T) {
 
 	valueRequired, value := buff.Peek()
 	require.True(t, valueRequired, "Should have a value to peek")
-	require.Equal(t, value, 4, "Both values should be same")
-	require.Equal(t, buff.Count(), 1, "Should have a count of one")
+	require.Equal(t, 4, value, "Both values should be same")
+	require.Equal(t, 1, buff.Count(), "Should have a count of one")
 
 }
 
@@ -104,7 +105,8 @@ func BenchmarkRingBuffer(b *testing.B) {
 		}
 	}
 
-	for i := 0; i < b.N; i++ {
+	var i int
+	for b.Loop() {
 		// Put one in
 		err := buff.Push(i)
 		if err != nil {
@@ -118,6 +120,7 @@ func BenchmarkRingBuffer(b *testing.B) {
 			b.Log("Should have had item")
 			b.FailNow()
 		}
+		i++
 	}
 
 }

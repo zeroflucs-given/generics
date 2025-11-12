@@ -8,6 +8,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
 	"github.com/zeroflucs-given/generics"
 )
 
@@ -151,8 +152,8 @@ func TestToMap(t *testing.T) {
 
 	// Assert
 	assert.Len(t, result, 4, "Should have 4 items in the dictionary")
-	assert.Equal(t, result["Key1"], 10, "Should have overwritten the first value")
-	assert.Equal(t, result["Key2"], 4, "Should have the right value for second item")
+	assert.Equal(t, 10, result["Key1"], "Should have overwritten the first value")
+	assert.Equal(t, 4, result["Key2"], "Should have the right value for second item")
 }
 
 func TestToMapContext(t *testing.T) {
@@ -174,8 +175,8 @@ func TestToMapContext(t *testing.T) {
 	// Assert
 	require.NoError(t, err, "Should not error")
 	assert.Len(t, result, 4, "Should have 4 items in the dictionary")
-	assert.Equal(t, result["Key1"], 10, "Should have overwritten the first value")
-	assert.Equal(t, result["Key2"], 4, "Should have the right value for second item")
+	assert.Equal(t, 10, result["Key1"], "Should have overwritten the first value")
+	assert.Equal(t, 4, result["Key2"], "Should have the right value for second item")
 }
 
 func TestToMapContextErrorKey(t *testing.T) {

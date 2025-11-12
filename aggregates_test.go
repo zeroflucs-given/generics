@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	"github.com/zeroflucs-given/generics"
 )
 
@@ -21,7 +22,7 @@ func TestMin(t *testing.T) {
 
 func TestMinEmpty(t *testing.T) {
 	// Arrange
-	input := []int{}
+	var input []int
 	target := 0
 
 	// Act
@@ -45,7 +46,7 @@ func TestMax(t *testing.T) {
 
 func TestMaxEmpty(t *testing.T) {
 	// Arrange
-	input := []int{}
+	var input []int
 	target := 0
 
 	// Act

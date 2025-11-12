@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	"github.com/zeroflucs-given/generics"
 )
 
@@ -16,7 +17,7 @@ func TestPointerTo(t *testing.T) {
 
 	// Assert
 	require.NotNil(t, pv)
-	require.Equal(t, *pv, "hello")
+	require.Equal(t, "hello", *pv)
 }
 
 func TestPointerOrNil(t *testing.T) {
@@ -39,7 +40,7 @@ func TestPointerOrNilWithValue(t *testing.T) {
 
 	// Assert
 	require.NotNil(t, pv)
-	require.Equal(t, *pv, "hello")
+	require.Equal(t, "hello", *pv)
 }
 
 func TestValueOrDefault(t *testing.T) {

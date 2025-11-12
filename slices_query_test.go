@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	"github.com/zeroflucs-given/generics"
 )
 
@@ -88,7 +89,7 @@ func TestFirstWithContextError(t *testing.T) {
 
 	// Assert
 	require.Error(t, err, "Should not error")
-	require.Equal(t, result, 0, "Should have the default type value")
+	require.Equal(t, 0, result, "Should have the default type value")
 }
 
 // TestFilter applies a filter to a set
@@ -226,5 +227,5 @@ func TestLastWithContextError(t *testing.T) {
 
 	// Assert
 	require.Error(t, err, "Should not error")
-	require.Equal(t, result, 0, "Should have the default type value")
+	require.Equal(t, 0, result, "Should have the default type value")
 }

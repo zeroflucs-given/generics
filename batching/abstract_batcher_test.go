@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/assert"
 	"github.com/zeroflucs-given/generics"
 	"github.com/zeroflucs-given/generics/batching"
 )
@@ -44,8 +44,8 @@ func TestAbstractBatcher(t *testing.T) {
 		wg.Add(1)
 		go func() {
 			res, err := batcher.Execute(context.TODO(), v)
-			require.Nil(t, err, "Should have no error at index %d", v)
-			require.Equal(t, v*2, res, "Should have got right result for item at index %d", v)
+			assert.NoError(t, err, "Should have no error at index %d", v)
+			assert.Equal(t, v*2, res, "Should have got right result for item at index %d", v)
 			wg.Done()
 		}()
 
@@ -87,8 +87,8 @@ func TestAbstractBatcherErrors(t *testing.T) {
 		wg.Add(1)
 		go func() {
 			res, err := batcher.Execute(context.TODO(), v)
-			require.ErrorIs(t, err, errExpect, "Should have error at index %d", v)
-			require.Zero(t, res, "Should have no data for index %d", v)
+			assert.ErrorIs(t, err, errExpect, "Should have error at index %d", v)
+			assert.Zero(t, res, "Should have no data for index %d", v)
 			wg.Done()
 		}()
 	}
